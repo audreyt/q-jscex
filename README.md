@@ -1,5 +1,5 @@
-jscex-jquery
-============
+q-jscex
+=======
 
 # Synopsis
 
