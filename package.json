@@ -1,0 +1,22 @@
+{ "name" :            "q-jscex"
+    , "description" : "Async/Await syntax support for Q promises"
+    , "version" :    "0.0.1"
+    , "main": "q-jscex.js"
+    , "dependencies": {
+        "q": "*",
+        "jscex": "*",
+        "jscex-jit": "*",
+        "jscex-async": "*"
+    }
+    , "devDependencies": {
+        "LiveScript": "0.9.7",
+        "q-http": "*"
+    }
+    , "keywords":    ["control-flow", "promise", "q", "async", "jit", "await"]
+    , "homepage":    "https://github.com/audreyt/q-jscex"
+    , "author":      "唐鳳 <audreyt@audreyt.org>"
+    , "repository": {
+        "type": "git",
+        "url": "https://github.com/audreyt/q-jscex.git"
+    }
+}
