@@ -4,7 +4,7 @@ if module?
     require \jscex-jit .init Jscex
     require \jscex-async .init Jscex
 else
-    Q ?= @Q ? throw new Error "Q not available -- Please include it"
+    Q ?= @Q ? throw new Error "Q not available -- Please include q.min.js"
     Jscex ?= @Jscex ? throw new Error "Jscex not available -- Please include jscex.min.js"
 
 /* Our own monad that runs on Q promises */
