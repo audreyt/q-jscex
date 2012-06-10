@@ -24,7 +24,7 @@ fetch('http://.../').done(...).fail(...).fin(...);
     
 # Description
 
-This module exports a Q root object (`Q`) containing an
+This module exports a Q root object (`Q`) containing a
 `Q.async.$` helper; it compiles a regular function into one
 that returns a Q Promise object.
 
@@ -45,6 +45,7 @@ The underlying JIT compiler is available as the `Q.async.$.Jscex` object.
 * Jscex: http://jscex.info/
 * Q: https://github.com/kriskowal/q
 * LiveScript: https://gkz.github.com/LiveScript
+* jQuery adapter for Jscex: https://github.com/audreyt/jscex-jquery/
 
 # CC0 1.0 Universal
 
