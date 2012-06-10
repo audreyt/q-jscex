@@ -21,6 +21,10 @@ var fetch = eval(Q.async.$(function(url) {
 // Return value of Async functions is always a Q Promise
 fetch('http://.../').done(...).fail(...).fin(...);
 ```
+
+# Demo (HTML5 Canvas required)
+
+http://audreyt.github.com/q-jscex/samples/sorting-animations.html
     
 # Description
 
@@ -37,6 +41,9 @@ to see it in action.
 The source code is in `src` directory and written in LiveScript.
 Note that LiveScript is _not_ a runtime dependency of this module;
 it's only used for development.
+
+For use in client-side browser environments, please see examples
+in the `samples` directory.
 
 The underlying JIT compiler is available as the `Q.async.$.Jscex` object.
 
