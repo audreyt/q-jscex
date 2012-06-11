@@ -11,6 +11,7 @@
   position: absolute; top: 0; right: 0; border: 0" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
     <script>
         "use strict";
+        var $async = Q.async.$;
 
 /* Adapted from code by @JeffreyZhao under the 2-clause BSD license:
    https://github.com/JeffreyZhao/jscex/blob/master/samples/async/sorting-animations.html
@@ -71,13 +72,13 @@
                 }
             }
             
-            var compareAsync = eval(Q.async.$(function (x, y, comparing) {
+            var compareAsync = eval($async(function (x, y, comparing) {
                 paint(array, null, comparing);
                 $await(Q.delay(compareCost));
                 return x - y;
             }));
 
-            var swapAsync = eval(Q.async.$(function (array, i, j) {
+            var swapAsync = eval($async(function (array, i, j) {
                 var t = array[i];
                 array[i] = array[j];
                 array[j] = t;
@@ -86,7 +87,7 @@
                 $await(Q.delay(updateCost));
             }));
             
-            var assignAsync = eval(Q.async.$(function (array, i, value, updating) {
+            var assignAsync = eval($async(function (array, i, value, updating) {
                 array[i] = value;
                 paint(array, updating);
                 $await(Q.delay(updateCost));
@@ -94,9 +95,9 @@
             
             var sortOperations = {
             
-                Quick: eval(Q.async.$(function (array) {
+                Quick: eval($async(function (array) {
             
-                    var partitionAsync = eval(Q.async.$(function (begin, end) {
+                    var partitionAsync = eval($async(function (begin, end) {
                         var i = begin;
                         var j = end;
                         var pivot = sharedTemp = array[Math.floor((begin + end) / 2)];
@@ -124,7 +125,7 @@
                         return i;
                     }));
                     
-                    var sortAsync = eval(Q.async.$(function (begin, end) {
+                    var sortAsync = eval($async(function (begin, end) {
                         var index = $await(partitionAsync(begin, end));
 
                         if (begin < index - 1) 
@@ -137,7 +138,7 @@
                     $await(sortAsync(0, array.length - 1));
                 })),
                 
-                Bubble: eval(Q.async.$(function (array) {
+                Bubble: eval($async(function (array) {
                     for (var i = 0; i < array.length; i++) {
                         for (var j = 0; j < array.length - i; j++) {
                             var r = $await(compareAsync(array[j], array[j + 1], [j, j + 1]));
@@ -146,7 +147,7 @@
                     }
                 })),
                 
-                Selection: eval(Q.async.$(function (array) {
+                Selection: eval($async(function (array) {
                     for(var j = 0; j < array.length - 1; j++) {
                         var mi = j;
                         for (var i = j + 1; i < array.length; i++) {
@@ -157,7 +158,7 @@
                     }            
                 })),
                 
-                Shell: eval(Q.async.$(function (array) {
+                Shell: eval($async(function (array) {
                     var gaps = [701, 301, 132, 57, 23, 10, 4, 1];
  
                     for (var gap = Math.floor(array.length / 2); gap > 0; gap = Math.floor(gap / 2)) {
@@ -189,7 +190,7 @@
             this.names = [];
             for (var m in sortOperations) this.names.push(m);
             
-            this.sortAsync = eval(Q.async.$(function (name, array) {
+            this.sortAsync = eval($async(function (name, array) {
                 paint(array);
                 $await(sortOperations[name](array));
                 paint(array);
@@ -227,7 +228,7 @@
                     array = sa.randomArray();
                 }
 
-                sa.sortAsync(comboNames.val(), array).always(function () {
+                sa.sortAsync(comboNames.val(), array).fin(function () {
                     array.sorted = true;
                     btnSort.removeAttr("disabled");
                     comboNames.removeAttr("disabled");

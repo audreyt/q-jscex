@@ -8,8 +8,11 @@ q-jscex
 var Q = require('q-jscex');
 var HTTP = require('q-http');
 
+// Shorthand to make typing easier
+var $async = Q.async.$;
+
 // Define an Async function with a special $await keyword in it
-var fetch = eval(Q.async.$(function(url) {
+var fetch = eval($async(function(url) {
     // $await takes anything that returns a Q Promise
     var buf = $await( HTTP.read(url) );
     // ...pauses one second...
