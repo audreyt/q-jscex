@@ -8,7 +8,7 @@ else
     Jscex ?= @Jscex ? throw new Error "Jscex not available -- Please include jscex.min.js"
 
 /* Our own monad that runs on Q promises */
-class AsyncBuilder
+class AsyncBuilder extends Jscex.BuilderBase
     Start: (_this, step) ->
         __ = Q.defer!
         step.next _this, !(type, value, target) ->
@@ -25,8 +25,6 @@ class AsyncBuilder
                 step.next _this, cb
             !(error) -> cb \throw, error
         )
-
-AsyncBuilder:: <<<< Jscex.BuilderBase::
 
 Jscex.binders.\async-q = \$await
 Jscex.builders.\async-q = new AsyncBuilder
