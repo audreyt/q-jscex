@@ -38,8 +38,8 @@ that returns a Q Promise object.
 Functions defined with `Q.async.$` has access to an extra `$await`
 keyword, which implicitly waits for other Q Promise objects.
 
-Please see `example.js` for a sample usage, and type `make demo`
-to see it in action.
+Please see `example.js` for awaiting multiple promises with `Q.all`,
+and type `make demo` to see it in action.
 
 The source code is in `src` directory and written in LiveScript.
 Note that LiveScript is _not_ a runtime dependency of this module;
