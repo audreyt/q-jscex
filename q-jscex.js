@@ -9,7 +9,7 @@
     Q == null && (Q = (__ref = this.Q) != null
       ? __ref
       : (function(){
-        throw new Error("Q not available -- Please include it");
+        throw new Error("Q not available -- Please include q.min.js");
       }()));
     Jscex == null && (Jscex = (__ref = this.Jscex) != null
       ? __ref
@@ -18,9 +18,9 @@
       }()));
   }
   /* Our own monad that runs on Q promises */
-  AsyncBuilder = (function(){
+  AsyncBuilder = (function(superclass){
     AsyncBuilder.displayName = 'AsyncBuilder';
-    var prototype = AsyncBuilder.prototype, constructor = AsyncBuilder;
+    var prototype = __extend(AsyncBuilder, superclass).prototype, constructor = AsyncBuilder;
     prototype.Start = function(_this, step){
       var __;
       __ = Q.defer();
@@ -58,8 +58,7 @@
     };
     function AsyncBuilder(){}
     return AsyncBuilder;
-  }());
-  __importAll(AsyncBuilder.prototype, Jscex.BuilderBase.prototype);
+  }(Jscex.BuilderBase));
   Jscex.binders['async-q'] = '$await';
   Jscex.builders['async-q'] = new AsyncBuilder;
   Jscex.modules['async-q'] = true;
@@ -74,8 +73,10 @@
   /* Turn off Jscex logging by default */
   Jscex.logger.level = 999;
   Q.async.$.Jscex = Jscex;
-  function __importAll(obj, src){
-    for (var key in src) obj[key] = src[key];
-    return obj;
+  function __extend(sub, sup){
+    function fun(){} fun.prototype = (sub.superclass = sup).prototype;
+    (sub.prototype = new fun).constructor = sub;
+    if (typeof sup.extended == 'function') sup.extended(sub);
+    return sub;
   }
 }).call(this);
