@@ -1,6 +1,6 @@
 { "name" :            "q-jscex"
     , "description" : "Async/Await syntax support for Q promises"
-    , "version" :    "0.0.1"
+    , "version" :    "0.0.2"
     , "main": "q-jscex.js"
     , "dependencies": {
         "q": "*",
