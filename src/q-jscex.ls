@@ -16,29 +16,27 @@ class AsyncBuilder extends Jscex.BuilderBase
             | \normal \return   => __.resolve value
             | \throw            => __.reject value
             | otherwise         => throw new Error "Unsupported type: #type"
-        return __.promise
+        __.promise
     Bind: (promise, generator) ->
-        return next: (_this, cb) -> promise.then(
+        next: (_this, cb) -> promise.then do
             !(result) ->
-                try step = generator.call _this, result
+                try  step = generator.call _this, result
                 catch return cb \throw, e
                 step.next _this, cb
             !(error) -> cb \throw, error
-        )
 
-Jscex.binders.\async-q = \$await
+Jscex.binders. \async-q = \$await
 Jscex.builders.\async-q = new AsyncBuilder
-Jscex.modules.\async-q = true
+Jscex.modules. \async-q = true
 
 /* Compile a function containing the special $await keyword.
 
    Once invoked, we implicitly start the task, and return a
    deferred Promise object representing its result.
 */
-Q.async.$ = (cb) -> Jscex.compile(\async-q, cb).replace(
+Q.async.$ = (cb) -> Jscex.compile(\async-q, cb).replace do
     /(Jscex.builders\["async-q"\])/
     'Q.async.$.$1'
-)
 
 /* Turn off Jscex logging by default */
 Jscex.logger.level = 999
